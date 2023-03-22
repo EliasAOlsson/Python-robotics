@@ -6,8 +6,19 @@ Algunos comandos útiles:
     matrix_a.dot(matrix_b) -> Producto escalar
 
     matrix_a.cross(matrix_b) -> Producto vectorial
-
 '''
+def simplifica_matriz(matriz):
+    'Metodo para simplificar matrices'
+    'Créditos a Alvaro Navarro Jorquera'
+    for i in range(len(matriz)):
+        matriz[i] = matriz[i].evalf(4)
+        try:
+            matriz[i] = round(matriz[i],4)
+        except TypeError:
+            for a in sp.preorder_traversal(matriz[i]):
+                if isinstance(a, sp.Float):
+                    matriz[i] = matriz[i].subs(a, round(a,4))   
+    return matriz
 
 def es_menor (numero):
     'Devuelve el número 0 si es menor que el valor puesto, si no devuelve el mismo numero'
@@ -41,16 +52,16 @@ def multiplicador (tamaño: int, post_or_pre: str, matrices: list):
     else:
         print("Introduce 'post' o 'pre'.")
 
-    return resultado
+    return simplifica_matriz(resultado)
 
 def rad(angulo: float):
     'Devuelve el ángulo introducido convertido a radianes'
     return angulo*(np.pi/180)
 
 
-'''v1 = sp.Matrix([[0.6427, 0.616, 0.4562]])
-v2 = sp.Matrix([[0.4275, -0.7815, 0.4544]])
-
-v3 = v2.cross(v1)
-
-sp.pprint(v3)'''
+# v1 = sp.Matrix([[0.6427, 0.616, 0.4562]])
+# v2 = sp.Matrix([[0.4275, -0.7815, 0.4544]])
+# 
+# v3 = v2.cross(v1)
+# 
+# sp.pprint(v3)

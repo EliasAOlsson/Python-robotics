@@ -1,9 +1,9 @@
 import numpy as np
 import sympy as sp
 from Utilities import multiplicador
-from sympy import pprint
-from sympy.abc import _clash1, _clash2
 from sympy import Quaternion
+from cuaterniones import esta_normalizado
+
 
 '''
 Matriz básica de rotación
@@ -98,8 +98,10 @@ def m_print(matriz: sp.Matrix)-> None:
       print('\n')
       print('------------------------------------')
 
-def m_conversor_rot(c: Quaternion) -> sp.Matrix:
+def Cuat_a_mat(c: Quaternion) -> sp.Matrix:
    'Convierte un cuaternio en una matiz de rotación'
+
+   esta_normalizado(c)
 
    nx = -(c.c)**2 -(c.d)**2 +1/2
 
@@ -123,7 +125,7 @@ def m_conversor_rot(c: Quaternion) -> sp.Matrix:
                      [ny, oy, ay],
                      [nz, oz, az]])
 
-def q_conversor_cuaternio (matriz: sp.Matrix) -> Quaternion:
+def Mat_a_cuat (matriz: sp.Matrix) -> Quaternion:
    'Convierte una matriz de rotación en un cuaternio'
    nx = matriz[0,0]
    ox = matriz[0,1]
@@ -136,6 +138,9 @@ def q_conversor_cuaternio (matriz: sp.Matrix) -> Quaternion:
    nz = matriz[2,0]
    oz = matriz[2,1]
    az = matriz[2,2]
+
+   if (sp.sqrt(nx+oy+az+1)/2) == 0:
+      print('\n', 'El primer parámetro del cuaternio es igual a 0!!!!', '\n')
 
    q0 = (sp.sqrt(nx+oy+az+1)/2)
    q1 = (sp.sqrt(nx-oy-az+1)/2)
@@ -157,70 +162,31 @@ def q_conversor_cuaternio (matriz: sp.Matrix) -> Quaternion:
 
 # Valores simbólicos--------------------------------------------#
 
-l1 , l2, l3, l4, l5, l6, l7 = sp.symbols('l1 l2 l3 l4 l5 l6 l7')
-Theta , Theta_1, Theta_2, Theta_3, Theta_4, Theta_5, Theta_6, Theta_7 = sp.symbols('Theta Theta_1 Theta_2 Theta_3 Theta_4 Theta_5 Theta_6 Theta_7')
-d1 , d2, d3, d4, d5, d6, d7 = sp.symbols('d1 d2 d3 d4 d5 d6 d7')
-Gamma, Gamma_1 = sp.symbols('Gamma Gamma_1')
-fi = sp.symbols('phi')
-zeta = sp.symbols('zeta')
-alpha = sp.symbols('alpha')
-q0, q1, q2, q3 = sp.symbols('q0 q1 q2 q3')
-a1, a2 = sp.symbols('a1 a2')
-nx, ny, nz = sp.symbols('nx ny nz')
-ox, oy, oz = sp.symbols('ox oy oz')
-ax, ay, az= sp.symbols('ax ay az')
-
-iden = sp.eye(3)
-zero = [0,0,0]
+# l1 , l2, l3, l4, l5, l6, l7 = sp.symbols('l1 l2 l3 l4 l5 l6 l7')
+# Theta , Theta_1, Theta_2, Theta_3, Theta_4, Theta_5, Theta_6, Theta_7 = sp.symbols('Theta Theta_1 Theta_2 Theta_3 Theta_4 Theta_5 Theta_6 Theta_7')
+# d1 , d2, d3, d4, d5, d6, d7 = sp.symbols('d1 d2 d3 d4 d5 d6 d7')
+# Gamma, Gamma_1 = sp.symbols('Gamma Gamma_1')
+# fi = sp.symbols('phi')
+# zeta = sp.symbols('zeta')
+# alpha = sp.symbols('alpha')
+# q0, q1, q2, q3 = sp.symbols('q0 q1 q2 q3')
+# a1, a2 = sp.symbols('a1 a2')
+# nx, ny, nz = sp.symbols('nx ny nz')
+# ox, oy, oz = sp.symbols('ox oy oz')
+# ax, ay, az= sp.symbols('ax ay az')
+# 
+# iden = sp.eye(3)
+# zero = [0,0,0]
 
 #---------------------------------------------------------------#
 
-
-#solucion = multiplicador(4, 'post', matrices)
-
-#solucion.simplify()
-
-'''m1 = m_rot('x', alpha)
-
-m2 = m_rot('y', fi)
-
-m3 = m_rot('z', Theta)
-
-solucion = multiplicador(3, 'post', [m1, m2, m3])
-
-solucion.simplify()'''
-
-
-#Ejemplo de pasar de cuaternios a matrices de rotación
-'''Q1 = Quaternion(0.91085, 0.06403, -0.37728, -0.15459)
-
-Q2 = Quaternion ( 0.14491, 0.49295, 0.08366, 0.85381)
-
-Q3 = Quaternion(0.28941, -0.50127, -0.7061, -0.40772)
-
-pprint(conversorQ_rot(Q1).evalf(2))
-print()
-pprint(conversorQ_rot(Q2).evalf(2))
-print()
-pprint(conversorQ_rot(Q3).evalf(2))
-'''
-#------------------------------------------------------#
-
-'''
-Parcial 2017
-Ecuaciones= [m_T('y', 1),
-             m_T('z', 1),
-             m_Rot('z', -sp.pi/4),
-             m_T('z', sp.sqrt(2)/2),
-             m_Rot('x', -0.4636),
-             m_T('y', 1)]
-
-sp.pprint(multiplicador(4, 'post', Ecuaciones).evalf(3))'''
-
-
-'''M = sp.Matrix([[0.290255180000000, -0.231013200000000, 0.928546320000000],
-               [-0.417586000000000, 0.348728000000000, 0.357403200000000],
-               [-0.406306320000000, -0.908212800000000, -0.0988728200000000]])
-
-sp.pprint(multiplicador(3, 'post', [M, m_basica('x', -sp.pi/2)]))'''
+# m1 = m_rot('x', alpha)
+# 
+# m2 = m_rot('y', fi)
+# 
+# m3 = m_rot('z', Theta)
+# 
+# solucion = multiplicador(3, 'post', [m1, m2, m3])
+# 
+# solucion.simplify()
 

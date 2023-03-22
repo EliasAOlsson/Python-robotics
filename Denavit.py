@@ -73,18 +73,6 @@ I = sp.symbols('I')
 
 # IMPORTATE, APLICA LOS GRADOS EN RADIANES
 
-'''Datos = [[sp.pi , l1, 0, sp.pi/2], #Fila articulación 1
-        [sp.pi/2, 0, 0, -sp.pi/2],
-        [sp.pi/2, -1, l2, -sp.pi/2],
-        [0, 1, 0, -sp.pi/2],
-        [-sp.pi, l3, 0, -sp.pi/2],
-        [0, l4, 0, 0]]'''
-
-'''Datos = [[Theta_1 , l1+l2, 0, sp.pi], 
-        [-sp.pi/2, d2, 0, sp.pi/2],
-        [0, d3-l3, 0, sp.pi],
-        [Theta_4, l4, 0, 0]]'''
-
 Datos = [[pi/2+pi, l12, -a, -pi/2],
         [0, 0, -l3, pi],
         [0, 0, l4, 0],
@@ -94,38 +82,9 @@ Datos = [[pi/2+pi, l12, -a, -pi/2],
 
 #--------------------------------------------------------------#
 
-'''Theta = 0
-di = l4
-ai = 0
-alpha = 0
-
-a00 = es_menor(sym.cos(Theta).evalf(2))
-a01 = es_menor(-sym.cos(alpha).evalf(2))*es_menor(sym.sin(Theta).evalf(2))
-a02 = es_menor(sym.sin(alpha).evalf(2))*es_menor(sym.sin(Theta).evalf(2))
-a03 = es_menor(ai)*es_menor(sym.cos(Theta).evalf(2))
-
-a10 = es_menor(sym.sin(Theta).evalf(2))
-a11 = es_menor(sym.cos(alpha).evalf(2))*es_menor(sym.cos(Theta).evalf(2))
-a12 = es_menor(-sym.sin(alpha).evalf(2))*es_menor(sym.cos(Theta).evalf(2))
-a13 = es_menor(ai)*es_menor(sym.sin(Theta).evalf(2))
-
-a21 = es_menor(sym.sin(alpha).evalf(2))
-a22 = es_menor(sym.cos(alpha).evalf(2))
-
-resultado = np.array([[ a00, a01 , a02 , a03 ],
-                            [a10, a11 , a12 , a13],
-                            [0, a21 , a22 , di],
-                            [0, 0, 0, 1]])
-
-
-Iden = np.array([[1, 0, 0, 0],
-                 [0, 1, 0, 0],
-                 [0, 0, 1, 0],
-                 [0, 0, 0, 1]])'''
-
 Matrices = []
 
-Multi = sp.eye(4) #
+Multi = sp.eye(4)
 
 for articulacion in Datos:
     Matrices.append(matriz(articulacion))

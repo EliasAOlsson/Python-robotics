@@ -1,17 +1,14 @@
-import sympy as sp
-
-from sympy import solve_poly_system
-from sympy.abc import x, y
-'''
-solve_poly_system([x*y - 2*y, 2*y**2 - x**2], x, y)
-
-sympy.solvers.solvers.nsolve -> Resolución métodos numéricos: 
-
-    sp.nsolve(ecuaciones, (Theta, phi, alpha), (1,1,1), verify=False)
-
-Consola: [(0, 0), (2, -sqrt(2)), (2, sqrt(2))] -> Vienen en el mismo orden que el 
-orden que hemos dado de argumentos.
-'''
+import sympy
+import numpy
+from cuaterniones import *
+from Utilities import *
+from Matrices import *
+from sympy import pi
+from sympy import Matrix
+from sympy import Quaternion
+from sympy import pprint
+from sympy import cos
+from sympy import sin
 
 # SIMBOLICO -----------------------------------------#
 
@@ -39,18 +36,10 @@ a1, a2 = sp.symbols('a1 a2')
 nx, ny, nz = sp.symbols('nx ny nz')
 ox, oy, oz = sp.symbols('ox oy oz')
 ax, ay, az= sp.symbols('ax ay az')
-#----------------------------------------------------#
 
-# e1 = -1.87*ny + 3.22*oy +0.39*ay - 2
-# e2 = 0.92*ny + 3.35*oy + 0.73*ay - 2
-# 
-# e4 = -0.9*ny + 5.1*oy + 2.26*ay -2
-# 
-# e6 = -1.82*nz + 1.55*oz + 1.53*az -2.73
-# e7 = nx*ox + ny*oy + nz*oz
-# e8 = ax*ox + ay*oy + az*oz
-# e9 = ax*nx + ay*ny + az*nz
-# 
-# e10 = sp.sqrt(nx**2 + ny**2 + nz**2) - 1
-# e11 = sp.sqrt(ox**2 + oy**2 + oz**2) - 1
+iden = sp.eye(3)
+zero = [0,0,0]
+
+q_identidad = Quaternion(1, 0, 0, 0)
+#----------------------------------------------------#
 
