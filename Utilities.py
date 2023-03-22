@@ -31,12 +31,12 @@ def multiplicador (tamaño: int, post_or_pre: str, matrices: list):
     if post_or_pre == 'pre':
 
         for matriz in matrices:
-            resultado = matriz * resultado
+            resultado = matriz @ resultado
             resultado.simplify()
 
     elif post_or_pre == 'post':
         for matriz in matrices:
-            resultado = resultado * matriz
+            resultado = resultado @ matriz
             resultado.simplify()
     else:
         print("Introduce 'post' o 'pre'.")
