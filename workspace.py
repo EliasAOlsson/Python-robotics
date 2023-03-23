@@ -41,4 +41,6 @@ iden = sp.eye(3)
 zero = [0,0,0]
 
 q_identidad = Quaternion(1, 0, 0, 0)
+q_zero = Quaternion(0,0,0,0)
 #----------------------------------------------------#
+
