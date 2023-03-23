@@ -158,6 +158,18 @@ def Mat_a_cuat (matriz: sp.Matrix) -> Quaternion:
 
    return cuaternio
 
+def extrae_Rot_Vector (m: sp.Matrix):
+   'Extrae la matriz de rotación de una matriz homogénea'
+   if sp.shape(m) == (4, 4):
+      matriz = sp.Matrix([[m[0,0], m[0,1], m[0,2]],
+                          [m[1,0], m[1,1], m[1,2]],
+                          [m[2,0], m[2,1], m[2,2]]])
+      
+      vector = [m[0,3], m[1,3], m[2,3]]
+      return matriz, vector
+   else:
+      print('SOLO MATRICES 4x4 HOMOGÉNEAS')
+
 #### NOTA IMPORTANE -> Problemas con el uso de la letra R como símbolo ###
 
 # Valores simbólicos--------------------------------------------#
