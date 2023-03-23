@@ -86,16 +86,38 @@ def esta_normalizado(c: Quaternion) -> None:
         print('NO ESTA NORMALIZADO')
         print('##########################################')
 
-def qtras_rot(cuaternio: Quaternion, v: Quaternion, P: Quaternion) -> Quaternion:
-    'Devuelve el vector resultado de la operación traslación + rotación'
+def q_movil_T_R(cuaternio: Quaternion, v: Quaternion, P: Quaternion) -> Quaternion:
+    '''Devuelve el vector resultado de la operación traslación + rotación respecto ejes móviles.
+    Es igual que Rot. + Tras. respecto ejes fijos'''
 
     esta_normalizado(cuaternio)
     multi = [cuaternio, v , q_conj(cuaternio)]
 
-    return q_mul(multi, 'post').add(P)
+    return (q_mul(multi, 'post')).add(P)
 
-def qrot_tras(cuaternio: Quaternion, v: Quaternion, P: Quaternion) -> Quaternion:
-    'Devuevlve el vector resultado de la operación rotación + traslación'
+def q_movil_R_T(cuaternio: Quaternion, v: Quaternion, P: Quaternion) -> Quaternion:
+    '''Devuevlve el vector resultado de la operación rotación + traslación respecto ejes móviles.
+    Es igual que la operación Tras. + Ror. respecto a ejes fijos'''
+
+    esta_normalizado(cuaternio)
+    vector = Quaternion(0, v.b + P.b, v.c + P.c, v.d + P.d)
+
+    multi = [cuaternio, vector ,q_conj(cuaternio)]
+
+    return q_mul(multi, 'post')
+
+def q_fijo_R_T(cuaternio: Quaternion, v: Quaternion, P: Quaternion) -> Quaternion:
+    '''Devuelve el vector resultado de la operación rotación + traslación respecto ejes fijos.
+    Es igual que Tras. + Rot. respecto ejes moviles'''
+
+    esta_normalizado(cuaternio)
+    multi = [cuaternio, v , q_conj(cuaternio)]
+
+    return (q_mul(multi, 'post')).add(P)
+
+def q_fijo_T_R(cuaternio: Quaternion, v: Quaternion, P: Quaternion) -> Quaternion:
+    '''Devuevlve el vector resultado de la operación traslación + rotación respecto ejes fijos.
+    Es igual que la operación Rot. + Tras. respecto a ejes moviles'''
 
     esta_normalizado(cuaternio)
     vector = Quaternion(0, v.b + P.b, v.c + P.c, v.d + P.d)

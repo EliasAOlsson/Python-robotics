@@ -1,3 +1,9 @@
+# OJO! Aquí las funciones eran TODAS ""respecto a ejes móviles"
+
+Los movimientos entre los ejes 0-1 y 1-2 eran respecto a
+ejes fijos, pero a la hora de hacer los scripts SOLO se tenían los referentes a ejes móviles (Al final las formulas TR moviles = RT fijos e igual con RT movil = TR Fijo, por lo que da igual pero es importante denotarlo)
+
+
 Q_01 = q_rot('z', pi/2)
 P_01 = Quaternion(0,1,1,1)
 
