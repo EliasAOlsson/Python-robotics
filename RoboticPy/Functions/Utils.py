@@ -1,5 +1,4 @@
 import sympy as sp
-import numpy as np
 
 '''
 Algunos comandos útiles:
@@ -7,6 +6,7 @@ Algunos comandos útiles:
 
     matrix_a.cross(matrix_b) -> Producto vectorial
 '''
+
 def simplifica_matriz(matriz):
     'Metodo para simplificar matrices'
     'Créditos a Alvaro Navarro Jorquera'
@@ -33,7 +33,7 @@ def es_menor (numero):
 
     return numero
 
-def multiplicador (tamaño: int, post_or_pre: str, matrices: list):
+def multiplicador(tamaño: int, post_or_pre: str, matrices: list):
     '''Multiplica las matrices introducidas en una lista y devuelve el resultado.
     Importante el argumento Post -> Móviles // Pre -> Fijos'''
 
@@ -56,6 +56,6 @@ def multiplicador (tamaño: int, post_or_pre: str, matrices: list):
 
 def rad(angulo: float):
     'Devuelve el ángulo introducido convertido a radianes'
-    return angulo*(np.pi/180)
+    return (angulo*(sp.pi/180)).evalf(5)
 
 

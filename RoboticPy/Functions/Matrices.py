@@ -1,8 +1,6 @@
-import numpy as np
 import sympy as sp
-from Utilities import multiplicador
 from sympy import Quaternion
-from cuaterniones import esta_normalizado
+from Functions.Quaternions import esta_normalizado
 
 
 '''
@@ -34,10 +32,11 @@ es la inversa de la matriz de rot. del sistema
 x,y,z respecto del u,v,w
 
 '''
+
 # Notas programa----------------------------#
-'''
- - Siendo dos matrices homogéneas T y R, siendo T una identidad + traslación y R una de rotación y vector (0,0,0), se da que RT = TR
-'''
+#
+# - Siendo dos matrices homogéneas T y R, siendo T una identidad + traslación y R una de rotación y vector (0,0,0), se da que RT = TR
+
 def m_basica(eje_giro: str, angulo):
    'Crea matrices de rotación básica'
    match eje_giro:
@@ -170,35 +169,4 @@ def extrae_Rot_Vector (m: sp.Matrix):
    else:
       print('SOLO MATRICES 4x4 HOMOGÉNEAS')
 
-#### NOTA IMPORTANE -> Problemas con el uso de la letra R como símbolo ###
-
-# Valores simbólicos--------------------------------------------#
-
-# l1 , l2, l3, l4, l5, l6, l7 = sp.symbols('l1 l2 l3 l4 l5 l6 l7')
-# Theta , Theta_1, Theta_2, Theta_3, Theta_4, Theta_5, Theta_6, Theta_7 = sp.symbols('Theta Theta_1 Theta_2 Theta_3 Theta_4 Theta_5 Theta_6 Theta_7')
-# d1 , d2, d3, d4, d5, d6, d7 = sp.symbols('d1 d2 d3 d4 d5 d6 d7')
-# Gamma, Gamma_1 = sp.symbols('Gamma Gamma_1')
-# fi = sp.symbols('phi')
-# zeta = sp.symbols('zeta')
-# alpha = sp.symbols('alpha')
-# q0, q1, q2, q3 = sp.symbols('q0 q1 q2 q3')
-# a1, a2 = sp.symbols('a1 a2')
-# nx, ny, nz = sp.symbols('nx ny nz')
-# ox, oy, oz = sp.symbols('ox oy oz')
-# ax, ay, az= sp.symbols('ax ay az')
-# 
-# iden = sp.eye(3)
-# zero = [0,0,0]
-
-#---------------------------------------------------------------#
-
-# m1 = m_rot('x', alpha)
-# 
-# m2 = m_rot('y', fi)
-# 
-# m3 = m_rot('z', Theta)
-# 
-# solucion = multiplicador(3, 'post', [m1, m2, m3])
-# 
-# solucion.simplify()
 

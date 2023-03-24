@@ -1,7 +1,5 @@
 import sympy as sp
-import numpy as np
 from sympy import Quaternion
-from sympy import pi
 from sympy import cos
 from sympy import sin
 
@@ -145,15 +143,3 @@ def q_sobre_eje(angle, v:list) -> Quaternion:
  ##################################################################
  #              RECUERDA NORMALIZAR CUATERNIOS                    #
  #################################################################
-
-# Valores simbólicos--------------------------------------------#
-
-#Cuaternio identidad = (1,0,0,0)
-
-# l1 , l2, l3, l4, l5, l6, l7 = sp.symbols('l1 l2 l3 l4 l5 l6 l7')
-# Theta_1, Theta_2, Theta_3, Theta_4, Theta_5, Theta_6, Theta_7 = sp.symbols('Theta_1 Theta_2 Theta_3 Theta_4 Theta_5 Theta_6 Theta_7')
-# d1 , d2, d3, d4, d5, d6, d7 = sp.symbols('d1 d2 d3 d4 d5 d6 d7')
-# 
-# Alpha = sp.symbols('Alpha')
-
-#---------------------------------------------------------------#
