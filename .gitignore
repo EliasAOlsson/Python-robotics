@@ -1,3 +1,9 @@
 .vscode
-**/__pycache__/
 .env
+*/tempCodeRunnerFile.py
+*/.ipynb_checkpoints
+.ipynb_checkpoints
+*/__pycache__
+__pycache__
+.DS_Store
+Users/

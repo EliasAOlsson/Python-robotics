@@ -3,12 +3,23 @@ from Functions.Quaternions import *
 from Functions.Sistema_ecuaciones import *
 from Functions.Utils import *
 from Functions.Matrices import *
+from Functions.Denavit import *
+
+
+#Código para Denavit
+
+# Datos = [[pi/2+pi, l12, -a, -pi/2],
+#         [0, 0, -l3, pi],
+#         [0, 0, l4, 0],
+#         [pi/2, 0, 0, -pi/2], 
+#         [pi/2, l5, 0, 0]]
+# 
+# impresion_completa(Datos)
+
 
 if __name__ == '__main__':
-    'Función "main" del programa, escribe el código que quieres ejecutar:'
     
     # SIMBOLICO -----------------------------------------#
-
     nx, ny, nz = sp.symbols('nx ny nz')
     ox, oy, oz = sp.symbols('ox oy oz')
     ax, ay, az = sp.symbols('ax ay az')
@@ -29,5 +40,7 @@ if __name__ == '__main__':
     zero = [0,0,0]
     q_identidad = Quaternion(1, 0, 0, 0)
     q_zero = Quaternion(0,0,0,0)
-
     #-------------------------------------------------
+    
+    'Escribe aquí tu programa'
+    

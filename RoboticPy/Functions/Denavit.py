@@ -2,9 +2,10 @@ import sympy as sp
 from sympy import pprint
 from sympy import pi
 from sympy import Matrix
-from Utils import multiplicador 
+from Functions.Utils import multiplicador 
+
 # Se importa Utils sin Functions.Utils
-# porque la función se utiliza SOLO cuando este script se ejecuta como __main__
+# porque la función multiplicador se utiliza SOLO cuando este script se ejecuta como __main__
 
 
 '''
@@ -71,27 +72,6 @@ def impresion_completa(Datos:list[list]) -> None:
         print('---------------------------------------', '\n')
 
     pprint(Multi)
-
-if __name__ == '__main__':
-
-    # Valores simbólicos--------------------------------------------#
-    l1 , l2, l3, l4, l5, l6, l7, l12 = sp.symbols('l1 l2 l3 l4 l5 l6 l7 l12')
-    Theta_1, Theta_2, Theta_3, Theta_4, Theta_5, Theta_6, Theta_7 = sp.symbols('Theta_1 Theta_2 Theta_3 Theta_4 Theta_5 Theta_6 Theta_7')
-    d1 , d2, d3, d4, d5, d6, d7 = sp.symbols('d1 d2 d3 d4 d5 d6 d7')
-    a = sp.symbols('a')
-    I = sp.symbols('I')
-
-    #---------------------------------------------------------------#
-
-    # IMPORTATE, APLICA LOS GRADOS EN RADIANES
-
-    Datos = [[pi/2+pi, l12, -a, -pi/2],
-            [0, 0, -l3, pi],
-            [0, 0, l4, 0],
-            [pi/2, 0, 0, -pi/2], 
-            [pi/2, l5, 0, 0]]
-    
-    impresion_completa(Datos)
 
 
 

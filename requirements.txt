@@ -1,3 +1,3 @@
-Numpy and Sympy must be installed for the functions and/or scripts to work:
+Sympy must be installed for the functions and/or scripts to work:
 
 pip install Sympy
