@@ -1,83 +1,52 @@
 import sympy as sp
 from sympy import Quaternion
-from Functions.Quaternions import esta_normalizado
+from Functions.Quaternions import is_normalized
 
 
-'''
-Matriz básica de rotación
-   u      v      w
-| n_x    o_x    a_x| x
-| n_y    o_y    a_y| y
-| n_z    o_z    a_z| z
-
-Donde cada componente es coseno del ángulo del indicado
-eje movil respecto del eje fijo correspondiente
-
-n_x = coseno(alpha)
-
-Siendo alpha el ángulo entre u y x
-
-PROPIEDADES
-
-El producto escalar de cada fila [n, o, a] NO debe ser
-superior a 1
-
-filas de 0 0 1 -> Posibles
-filas de 0 2 0 -> NO POSIBLE -> 0 de nota
-
-M ^-1 = M ^T (Matriz traspuesta = Inversa)
-
-La matriz de rotación del sistema u,v,w respecto del x,y,z
-es la inversa de la matriz de rot. del sistema
-x,y,z respecto del u,v,w
-
-'''
-
-# Notas programa----------------------------#
-#
-# - Siendo dos matrices homogéneas T y R, siendo T una identidad + traslación y R una de rotación y vector (0,0,0), se da que RT = TR
-
-def m_basica(eje_giro: str, angulo):
-   'Crea matrices de rotación básica'
-   match eje_giro:
+def m_basic(rotation_axis: str, angle):
+   'Returns a basic rotation matrix around the specified rotation axis and angle.'
+   match rotation_axis:
 
       case 'x':
          return sp.Matrix([[1, 0, 0],
-                          [0, sp.cos(angulo),-sp.sin(angulo)],
-                          [0, sp.sin(angulo), sp.cos(angulo)]])
+                          [0, sp.cos(angle),-sp.sin(angle)],
+                          [0, sp.sin(angle), sp.cos(angle)]])
       case 'y':
-         return sp.Matrix([[sp.cos(angulo), 0, sp.sin(angulo)],
+         return sp.Matrix([[sp.cos(angle), 0, sp.sin(angle)],
                           [0, 1, 0],
-                          [-sp.sin(angulo), 0, sp.cos(angulo)]])
+                          [-sp.sin(angle), 0, sp.cos(angle)]])
       case 'z':
-         return sp.Matrix([[sp.cos(angulo), -sp.sin(angulo), 0],
-                          [sp.sin(angulo), sp.cos(angulo), 0],
+         return sp.Matrix([[sp.cos(angle), -sp.sin(angle), 0],
+                          [sp.sin(angle), sp.cos(angle), 0],
                           [0, 0, 1]])
 
-def m_T (eje: str, distancia):
-   'Devuelve una matriz homogénea de traslación con el vector dado'
+def m_T (axis: str, distance):
+
+   'Returns a homogeneus rotation matrix with the specified axis and distance (Only one axis). [No rotation]'
    
    iden = sp.eye(3)
 
-   match eje:
+   match axis:
 
       case 'x':
-         vector = [distancia, 0, 0]
-         return m_homogenea(iden, vector)
+         vector = [distance, 0, 0]
+         return m_homo(iden, vector)
       case 'y':
-            vector = [0, distancia, 0]
-            return m_homogenea(iden, vector)
+            vector = [0, distance, 0]
+            return m_homo(iden, vector)
       case 'z':
-            vector = [0, 0, distancia]
-            return m_homogenea(iden, vector)
+            vector = [0, 0, distance]
+            return m_homo(iden, vector)
 
 def m_Rot (eje :str, angulo):
-   'Devuelve una matriz homogénea de rotación dado el ángulo y el eje de giro'
+   'Returns a homogeneous rotation matrix with the specified angle and rotation axis (Only one axis). [No movement]'
 
-   return m_homogenea(m_basica(eje, angulo), zero)
+   zero = [0, 0, 0]
 
-def m_homogenea(matriz_rot, vector: list):
-   'Devuelve una matriz homogénea a partir de una matriz básica de rotación y su vector de movimiento'
+   return m_homo(m_basic(eje, angulo), zero)
+
+def m_homo(matriz_rot, vector: list):
+   'Returns a homogeneous transformation matrix with the specified rotation matrix and movement vector'
    
    vector_p = sp.Matrix([vector[0], vector[1], vector[2]])
    if not isinstance(matriz_rot, sp.Matrix):
@@ -89,8 +58,10 @@ def m_homogenea(matriz_rot, vector: list):
    return matriz_rot
 
 def m_print(matriz: sp.Matrix)-> None:
-   'Función para "printear" cada línea de la matriz por separado'
-   print('Salida m_print: ', '\n')
+
+   'Function that prints a matrix, with each row separated by a line. Useful for big matrices'
+
+   print('M_print OUTPUT: ', '\n')
    tam = sp.shape(matriz)
    for i in range(tam[0]):
       print(matriz.row(i))
@@ -98,9 +69,9 @@ def m_print(matriz: sp.Matrix)-> None:
       print('------------------------------------')
 
 def Cuat_a_mat(c: Quaternion) -> sp.Matrix:
-   'Convierte un cuaternio en una matiz de rotación'
+   'Converts a quaternion into a rotation matrix'
 
-   esta_normalizado(c)
+   is_normalized(c)
 
    nx = -(c.c)**2 -(c.d)**2 +1/2
 
@@ -125,7 +96,9 @@ def Cuat_a_mat(c: Quaternion) -> sp.Matrix:
                      [nz, oz, az]])
 
 def Mat_a_cuat (matriz: sp.Matrix) -> Quaternion:
-   'Convierte una matriz de rotación en un cuaternio'
+
+   'Converts a rotation matrix into a quaternion'
+
    nx = matriz[0,0]
    ox = matriz[0,1]
    ax = matriz[0,2]
@@ -139,7 +112,7 @@ def Mat_a_cuat (matriz: sp.Matrix) -> Quaternion:
    az = matriz[2,2]
 
    if (sp.sqrt(nx+oy+az+1)/2) == 0:
-      print('\n', 'El primer parámetro del cuaternio es igual a 0!!!!', '\n')
+      print('\n', 'Q0 is equal to 0!!!!', '\n')
 
    q0 = (sp.sqrt(nx+oy+az+1)/2)
    q1 = (sp.sqrt(nx-oy-az+1)/2)
@@ -153,20 +126,22 @@ def Mat_a_cuat (matriz: sp.Matrix) -> Quaternion:
    if ny-ox < 0:
       q3 = -q3
       
-   cuaternio= Quaternion(q0, q1, q2, q3)
+   cuaternion= Quaternion(q0, q1, q2, q3)
 
-   return cuaternio
+   return cuaternion
 
-def extrae_Rot_Vector (m: sp.Matrix):
-   'Extrae la matriz de rotación de una matriz homogénea'
+def extract_rot_vector (m: sp.Matrix):
+
+   'Extracts the basic rotation matrix and movement vector from an homogeneous transformation matrix.'
+
    if sp.shape(m) == (4, 4):
-      matriz = sp.Matrix([[m[0,0], m[0,1], m[0,2]],
+      matrix = sp.Matrix([[m[0,0], m[0,1], m[0,2]],
                           [m[1,0], m[1,1], m[1,2]],
                           [m[2,0], m[2,1], m[2,2]]])
       
       vector = [m[0,3], m[1,3], m[2,3]]
-      return matriz, vector
+      return matrix, vector
    else:
-      print('SOLO MATRICES 4x4 HOMOGÉNEAS')
+      print('Only homogeneous tranformation matrices (4x4)')
 
 

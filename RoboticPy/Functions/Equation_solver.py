@@ -2,19 +2,8 @@ import sympy as sp
 from sympy import solve_poly_system
 from sympy.abc import x, y
 
-'''
-solve_poly_system([x*y - 2*y, 2*y**2 - x**2], x, y)
-
-sympy.solvers.solvers.nsolve -> Resolución métodos numéricos: 
-
-    sp.nsolve(ecuaciones, (Theta, phi, alpha), (1,1,1), verify=False)
-
-Consola: [(0, 0), (2, -sqrt(2)), (2, sqrt(2))] -> Vienen en el mismo orden que el 
-orden que hemos dado de argumentos.
-'''
-
 if __name__ == '__main__':
-    # SIMBOLICO -----------------------------------------#
+    # SIMBOLIC -----------------------------------------#
     nx, ny, nz = sp.symbols('nx ny nz')
     ox, oy, oz = sp.symbols('ox oy oz')
     ax, ay, az = sp.symbols('ax ay az')

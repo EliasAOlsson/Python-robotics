@@ -1,25 +1,16 @@
 import sympy as sp
 from Functions.Quaternions import *
-from Functions.Sistema_ecuaciones import *
+from Functions.Equation_solver import *
 from Functions.Utils import *
 from Functions.Matrices import *
 from Functions.Denavit import *
 
-
-#Código para Denavit
-
-# Datos = [[pi/2+pi, l12, -a, -pi/2],
-#         [0, 0, -l3, pi],
-#         [0, 0, l4, 0],
-#         [pi/2, 0, 0, -pi/2], 
-#         [pi/2, l5, 0, 0]]
-# 
-# impresion_completa(Datos)
-
-
 if __name__ == '__main__':
     
-    # SIMBOLICO -----------------------------------------#
+    # SIMBOLIC (IGNORE) -----------------------------------------#
+
+    'You can use any of the keywords specified below as simbolic values. You can add more following the same structure.'
+
     nx, ny, nz = sp.symbols('nx ny nz')
     ox, oy, oz = sp.symbols('ox oy oz')
     ax, ay, az = sp.symbols('ax ay az')
@@ -42,5 +33,5 @@ if __name__ == '__main__':
     q_zero = Quaternion(0,0,0,0)
     #-------------------------------------------------
     
-    'Escribe aquí tu programa'
-    
+    'Write here your code'
+

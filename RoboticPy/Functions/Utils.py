@@ -1,14 +1,7 @@
 import sympy as sp
 
-'''
-Algunos comandos útiles:
-    matrix_a.dot(matrix_b) -> Producto escalar
-
-    matrix_a.cross(matrix_b) -> Producto vectorial
-'''
-
-def simplifica_matriz(matriz):
-    'Metodo para simplificar matrices'
+def simplify_matrix(matriz):
+    'Matrix "simplificator"'
     'Créditos a Alvaro Navarro Jorquera'
     for i in range(len(matriz)):
         matriz[i] = matriz[i].evalf(4)
@@ -20,42 +13,49 @@ def simplifica_matriz(matriz):
                     matriz[i] = matriz[i].subs(a, round(a,4))   
     return matriz
 
-def es_menor (numero):
-    'Devuelve el número 0 si es menor que el valor puesto, si no devuelve el mismo numero'
+def simply (number):
+    'Returns a 0 if the argument is smaller than the specified limit. If the argument is a sympy symbolic, it just returns the simbolic.'
     
+    limit = 0.0001
+
     try:
-        if sp.Abs(numero) < 0.0001:
+        if sp.Abs(number) < limit:
             return 0
     except ValueError:
         pass
     except TypeError:
         pass
 
-    return numero
+    return number
 
-def multiplicador(tamaño: int, post_or_pre: str, matrices: list):
-    '''Multiplica las matrices introducidas en una lista y devuelve el resultado.
-    Importante el argumento Post -> Móviles // Pre -> Fijos'''
+def multiplicator(size: int, post_or_pre: str, matrices: list):
+    ''' Multiplies the matrices in the "matrices" list and returns the sucesive result.
+    It is important to specify the order of multiplication:
 
-    resultado = sp.eye(tamaño)
+    Post --> The multiplication goes from left to right.
+
+    Pre --> The multiplication goes from right to left.
+    '''
+
+    result = sp.eye(size)
 
     if post_or_pre == 'pre':
 
-        for matriz in matrices:
-            resultado = matriz @ resultado
-            resultado.simplify()
+        for matrix in matrices:
+            result = matrix @ result
+            result.simplify()
 
     elif post_or_pre == 'post':
-        for matriz in matrices:
-            resultado = resultado @ matriz
-            resultado.simplify()
+        for matrix in matrices:
+            result = result @ matrix
+            result.simplify()
     else:
         print("Introduce 'post' o 'pre'.")
 
-    return simplifica_matriz(resultado)
+    return simplify_matrix(result)
 
-def rad(angulo: float):
-    'Devuelve el ángulo introducido convertido a radianes'
-    return (angulo*(sp.pi/180)).evalf(5)
+def rad(angle: float):
+    'Returns the angle specified as argument to radians' 
+    return (angle*(sp.pi/180)).evalf(5)
 
 
