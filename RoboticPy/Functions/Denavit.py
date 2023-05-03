@@ -39,7 +39,11 @@ def articulation_matrix(data:list) -> Matrix:
         return result
 
 def Complete_print(Data:list[list]) -> None:
-    'Prints the matrixes inside the list and their post-multiplication'
+    '''Receives as argument the complete table from Denavit-Hartenberg algorithm.
+    Prints the rotation matrix asociated to each articulation AND the final post-multiplication
+    of each rotation matrix (which would be the resulting rotation matrix of the whole robot)
+    
+    Example of code found on the documentation.'''
 
     Matrices = []
     Multi = sp.eye(4)

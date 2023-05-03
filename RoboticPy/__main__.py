@@ -35,3 +35,10 @@ if __name__ == '__main__':
     
     'Write here your code'
 
+Denavit_algorithm = [[pi/2+pi, l1, -l2, -pi/2],
+                     [0, 0, -l3, pi],
+                     [0, 0, l4, 0],
+                     [pi/2, 0, 0, -pi/2], 
+                     [pi/2, l5, 0, 0]]
+ 
+Complete_print(Denavit_algorithm)
