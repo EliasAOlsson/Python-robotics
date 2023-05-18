@@ -38,8 +38,23 @@ def articulation_matrix(data:list) -> Matrix:
 
         return result
 
-def Complete_print(Data:list[list]) -> None:
-    'Prints the matrixes inside the list and their post-multiplication'
+def Denavit(Data:list[list]) -> sp.Matrix:
+    'Returns the result of the Denavit-Hartenberg algorithm.'
+
+    Matrices = []
+    Multi = sp.eye(4)
+
+    for articulacion in Data:
+        Matrices.append(articulation_matrix(articulacion))
+
+    Multi = multiplicator(4, 'post', Matrices)
+
+    Multi.simplify()
+
+    return Multi
+
+def Complete_print(Data:list[list]) -> sp.Matrix:
+    'Prints the matrixes inside the list and their post-multiplication. It returns the result as well.'
 
     Matrices = []
     Multi = sp.eye(4)
@@ -60,6 +75,7 @@ def Complete_print(Data:list[list]) -> None:
 
     pprint(Multi)
 
+    return Multi
 
 
 

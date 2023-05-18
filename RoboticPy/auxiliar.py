@@ -4,11 +4,6 @@ from Functions.Utils import *
 from Functions.Matrices import *
 from Functions.Denavit import *
 
-from sympy import cos
-from sympy import sin
-from sympy import Matrix
-
-
 if __name__ == '__main__':
     
     # SIMBOLIC (IGNORE) -----------------------------------------#
@@ -39,5 +34,4 @@ if __name__ == '__main__':
     
     'Write here your code'
 
-
- 
+    

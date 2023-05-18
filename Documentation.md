@@ -6,6 +6,8 @@ print(matriz_i[-2][0]) # -> Access operator to N-dimensional arrays
 
 print(Multi[-2,3]) # -> Access operator to matrices
 
+Matrix[0,1] # -> Access to first row second column
+
 pprint(*matrix*) # -> Sympy function that allows "prety" printintg. Specially useful for printing matrices.
 
 matrix_a.dot(matrix_b) # -> "dot" product of matrices
@@ -70,7 +72,7 @@ The rotation matrix of u,v,w with x,y,z as reference is the inverted matrix of x
 
 For more information about quaternions: https://en.wikipedia.org/wiki/Quaternion.
 
-## __Sistema_ecuaciones__
+## __Equation_solver__
 
 A basic implementation of a linear equation solver (It's from sympy)
 

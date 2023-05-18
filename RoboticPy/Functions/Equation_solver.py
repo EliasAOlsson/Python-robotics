@@ -1,6 +1,6 @@
 import sympy as sp
 from sympy import solve_poly_system
-from sympy.abc import x, y
+from sympy.abc import x, y, a, v
 
 if __name__ == '__main__':
     # SIMBOLIC -----------------------------------------#
@@ -29,4 +29,5 @@ if __name__ == '__main__':
     ox, oy, oz = sp.symbols('ox oy oz')
     ax, ay, az= sp.symbols('ax ay az')
     #----------------------------------------------------#
+
     
