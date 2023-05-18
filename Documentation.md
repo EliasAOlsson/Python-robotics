@@ -24,15 +24,18 @@ All the code you want to implement should be indented into the 'if __name_ _' fu
 
 Example code: 
 
+ *NOTE --> Each articulation is inserted as a list inside a list (forming a matrix). The matrix structure
+ offered by sympy is NOT used. Use the python list structure.
+
 ````python
 
-Data = [[pi/2+pi, l1, -l2, -pi/2],
-        [0, 0, -l3, pi],
-        [0, 0, l4, 0],
-        [pi/2, 0, 0, -pi/2], 
-        [pi/2, l5, 0, 0]]
-        
-Complete_print(Data)
+Denavit_algorithm = [[pi/2+pi, l1, -l2, -pi/2],
+                     [0, 0, -l3, pi],
+                     [0, 0, l4, 0],
+                     [pi/2, 0, 0, -pi/2], 
+                     [pi/2, l5, 0, 0]]
+ 
+Complete_print(Denavit_algorithm)
 
 ````
 

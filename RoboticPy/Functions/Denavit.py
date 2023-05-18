@@ -78,5 +78,3 @@ def Complete_print(Data:list[list]) -> sp.Matrix:
     return Multi
 
 
-
-
